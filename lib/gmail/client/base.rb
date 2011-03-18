@@ -1,4 +1,4 @@
-require 'thread'
+#require 'thread'
 
 module Gmail
   module Client
@@ -18,7 +18,7 @@ module Gmail
         defaults       = {}
         @username      = fill_username(username)
         @options       = defaults.merge(options)
-        @mailbox_mutex = Mutex.new
+#        @mailbox_mutex = Mutex.new
       end
       
       # Connect to gmail service. 
@@ -151,7 +151,7 @@ module Gmail
       #     ...
       #   end
       def mailbox(name, &block)
-        @mailbox_mutex.synchronize do
+#        @mailbox_mutex.synchronize do
           name = name.to_s
           mailbox = (mailboxes[name] ||= Mailbox.new(self, name))
           switch_to_mailbox(name) if @current_mailbox != name
@@ -165,7 +165,7 @@ module Gmail
           end
 
           return mailbox
-        end
+ #       end
       end
       alias :in_mailbox :mailbox
       alias :in_label :mailbox
